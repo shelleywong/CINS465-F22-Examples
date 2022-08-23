@@ -1,6 +1,8 @@
 # starter_repo
 Repo to initialize class repositories from, setups initial CI/CD for gitlab as well
 
+## Shelley Wong CINS 465 Fall 2022
+
 ## regular files
 
 * **Dockerfile** - Initial dockerfile to help us setup our environment
