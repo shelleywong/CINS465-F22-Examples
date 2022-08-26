@@ -1,0 +1,34 @@
+/* element style */
+h1 {
+  color: #006400;
+  font-size: 60px;
+}
+
+body {
+  width: 600px;
+  margin: 0 auto;
+  background-color: ##FFF8DC;
+  padding: 0 20px 20px 20px;
+  /*border: 5px solid black;*/
+}
+
+/* id style */
+#cins465name {
+  color: green;
+}
+
+/* class style */
+.fonttext {
+  font-family: cursive;
+}
+
+.centertext {
+  text-align: center;
+}
+
+.myimages {
+  width: 400px;
+  margin: 0 auto;
+  padding: 0 20px 20px 20px;
+  /*border: 5px solid black;*/
+}
