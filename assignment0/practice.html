@@ -1,45 +1,60 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-US" class="no-js" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My CINS 465 test page</title>
+    <link rel="stylesheet" href="styles/foundation.min.css">
     <link href="styles/style.css" rel="stylesheet">
   </head>
   <body>
     <!-- Shelley Wong, CINS465 Assignment #0 -->
-    <h1 class="centertext"></h1>
-    <h2 id="cins465name" class="centertext"></h2>
-    <p class="fonttext centertext">Hello CINS 465!</p>
-    <h3 class="centertext">Assignment #0</h3>
-    <ul>
-      <li>Cows are <strong>cool</strong></li>
-      <li>They get to hang out in fields and eat grass <em>all day</em></li>
-      <li>They make delicious ice cream and cheese</li>
-    </ul>
-    <div>
-    <img class="myimages" src="images/cows.jpeg" alt="cows in a field">
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 cell">
+          <h1 class="centertext"></h1>
+          <h2 id="cins465name" class="centertext"></h2>
+          <p class="fonttext centertext">Hello CINS 465!</p>
+          <h3 class="centertext">Assignment #0</h3>
+        </div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="large-4 medium-2 cell">
+          <ul>
+            <li>Cows are <strong>cool</strong></li>
+            <li>They get to hang out in fields and eat grass <em>all day</em></li>
+            <li>They make delicious ice cream and cheese</li>
+          </ul>
+        </div>
+        <div class="large-4 medium-8 cell">
+          <img class="myimages" src="images/cows.jpeg" alt="cows in a field">
+          <a href="https://sierranevadacheese.com/">
+            Sierra Nevada Cheese
+          </a>
+        </div>
+        <div class="large-4 medium-2 cell">
+          <button id="counter" class="button">Cow Counter</button>
+          <div id="countdiv"></div>
+          <table>
+            <tr>
+              <th class="fonttext">Table Header</th>
+            </tr>
+            <tr>
+              <td>Row 1, data 1</td>
+              <td>Row 1, data 2</td>
+            </tr>
+            <tr>
+              <td>Row 2, data 1</td>
+              <td>Row 2, data 2</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
-    <a href="https://sierranevadacheese.com/">
-      Sierra Nevada Cheese
-    </a>
-    <button id="counter">Cow Counter</button>
-    <div id="countdiv"></div>
-    <div>
-    <table>
-      <tr>
-        <th class="fonttext">Table Header</th>
-      </tr>
-      <tr>
-        <td>Row 1, data 1</td>
-        <td>Row 1, data 2</td>
-      </tr>
-      <tr>
-        <td>Row 2, data 1</td>
-        <td>Row 2, data 2</td>
-      </tr>
-    </table>
-    </div>
+    <script src="scripts/vendor/jquery.js"></script>
+    <script src="scripts/vendor/what-input.js"></script>
+    <script src="scripts/vendor/foundation.min.js"></script>
     <script src="scripts/main.js"></script>
 
   </body>
