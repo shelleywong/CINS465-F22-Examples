@@ -25,9 +25,16 @@ myImage.onclick = function(){
 
 // button onclick example
 const countdiv = document.querySelector('#countdiv');
+// JavaScript dynamic typing example
 let count = 0;
+count = "0.0";
+count = 0;
 let mycounter = document.querySelector('#counter');
 mycounter.onclick = function(){
   count++;
   countdiv.textContent = count;
+  console.log("count is now: " + count + ", type: " + typeof(count));
+  // JavaScript loosely or weak typing example
+  count = count + ".0";
+  console.log("count is now: " + count + ", type: " + typeof(count));
 }
