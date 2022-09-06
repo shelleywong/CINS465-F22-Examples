@@ -59,8 +59,21 @@ print(p1.getAge())
 # Python inheritance Example
 class Student(Person):
     def __init__(self, name, age, grade):
-        Person.__init__(self, name, age)
+        #Person.__init__(self, name, age)
+        super().__init__(name, age)
         self.grade = grade
+
+    def __str__(self):
+        #return '%s: %d years old, in %d grade' % (self.name, self.age, self.grade)
+        #return '{0}, {1}, {2}'.format(self.name, self.age, self.grade)
+        # return f'{self.name}' \
+        #         f"{self.age}" \
+        #         f"{self.grade}"
+        return """{self.name}
+{self.age}
+{self.grade}"""
 
 p2 = Student("Alan", 42, 12)
 print(p2)
+p2.setAge(43)
+print(p2.getAge())
