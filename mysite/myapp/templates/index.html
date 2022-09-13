@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ title }} {{ msg }}!</h1>
+<p>My first name is {{ first_name }}. My last name is {{ last_name }}.
+</p>
+{% if prev_page >= 0 %}
+<a href="/{{ prev_page }}">Prev</a>
+{% endif %}
+<a href="/{{ next_page }}">Next</a>
+<ol>
+  {% for elem in page_list %}
+  <li>{{ elem }}</li>
+  {% endfor %}
+</ol>
+<ul>
+  {% for num in squares_list %}
+  <li>{{ num }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
