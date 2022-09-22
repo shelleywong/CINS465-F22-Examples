@@ -8,4 +8,4 @@ class QuestionModel(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "ID: " + str(self.id) + ", " + self.question_text + ", " + str(self.pub_date.strftime("%d %b %Y"))
+        return "ID: " + str(self.id) + ", " + self.question_text + ", " + str(self.pub_date.strftime("%d %b %Y, %H:%M"))

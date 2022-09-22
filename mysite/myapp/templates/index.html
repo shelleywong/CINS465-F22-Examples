@@ -22,6 +22,7 @@
       <a href="/{{ prev_page }}">Prev</a>
       {% endif %}
       <a href="/{{ next_page }}">Next</a>
+      <div><a href="/questions">Ask a Question</a></div>
     </div>
     <div class="large-4 medium-6 small-9 cell">
       <ol>
@@ -38,13 +39,6 @@
       </ul>
     </div>
   </div>
-  <div class="grid-x grid-padding-x">
-    <div class="medium-6 medium-offset-3 cell">
-      {% for q in q_list %}
-      <div>{{ q }}</div>
-      {% endfor %}
-  </div>
-</div>
 {% endblock %}
 
 {% block scripts %}
