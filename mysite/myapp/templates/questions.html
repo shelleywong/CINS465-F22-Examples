@@ -14,14 +14,22 @@
   </div>
   <div class="grid-x grid-padding-x">
     <div class="medium-6 medium-offset-3 cell">
+      {% if request.user.is_authenticated %}
       <form action="/questions/" method="post">
         {% csrf_token %}
         {{ q_form }}
         <input class="button" type="submit" value="Submit">
       </form>
+      {% endif %}
       <hr>
       {% for q in q_list %}
-      <div>{{ q }}</div>
+      <div>{{ q.question_text }}</div>
+      <p>{{ q.author }}, {{ q.pub_date }}</p>
+      <ul>
+        {% for a in q.answers %}
+        <li>{{ a.answer_text }}</li>
+        {% endfor %}
+      </ul>
       {% endfor %}
     </div>
   </div>

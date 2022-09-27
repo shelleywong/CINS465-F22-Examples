@@ -17,8 +17,9 @@ class QuestionForm(forms.Form):
             must_not_be_all_caps
         ])
 
-    def save(self):
+    def save(self, request):
         q_instance = models.QuestionModel()
         q_instance.question_text = self.cleaned_data["question_field"]
+        q_instance.author = request.user
         q_instance.save()
         return q_instance

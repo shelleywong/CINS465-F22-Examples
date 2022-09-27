@@ -13,6 +13,10 @@ body {
   /*border: 5px solid black;*/
 }
 
+p {
+  color: green;
+}
+
 /* id style */
 #cins465name {
   color: green;

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from . import models
@@ -24,14 +24,25 @@ def index(request, page=0):
 def questions(request):
     if request.method == "POST":
         q_form = forms.QuestionForm(request.POST)
-        if q_form.is_valid():
-            q_form.save()
-            q_form = forms.QuestionForm()
+        if q_form.is_valid() and request.user.is_authenticated:
+            q_form.save(request)
+            #q_form = forms.QuestionForm()
+            return redirect("/questions/")
 
     else: # GET and all other HTTP methods
         q_form = forms.QuestionForm()
 
-    q_list = models.QuestionModel.objects.all()
+    q_objects = models.QuestionModel.objects.all()
+    q_list = []
+    for q in q_objects:
+        temp_q = {}
+        temp_q["question_text"] = q.question_text
+        temp_q["pub_date"] = q.pub_date
+        temp_q["author"] = q.author.username
+        a_objects = models.AnswerModel.objects.filter(question=q)
+        temp_q["answers"] = a_objects
+        q_list += [temp_q]
+
     context = {
         'title': 'CINS 465 Questions',
         'q_form': q_form,
