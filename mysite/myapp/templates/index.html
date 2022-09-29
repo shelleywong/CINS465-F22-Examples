@@ -12,8 +12,7 @@
     <div class="large-12 cell">
       <img class="csuclogo" src="{% static 'images/csuc-logo.svg'%}" alt="CSU, Chico logo">
       <h1>{{ title}} {{ msg }}!</h1>
-      <p>My first name is {{ first_name }}. My last name is {{ last_name }}.
-      </p>
+      <p>Hello, {{ current_user.username }}!</p>
     </div>
   </div>
   <div class="grid-x grid-padding-x">

@@ -10,6 +10,19 @@
     <link rel='stylesheet' href="{% static 'css/style.css' %}">
   </head>
   <body>
+    <div class="nav-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li><a href="/" class="nav-links"><strong>CINS 465</strong></a></li>
+          {% if request.user.is_authenticated %}
+          <li><a href="/questions/" class="nav-links">Ask a Question</a></li>
+          <li><a href="/logout/" class="nav-links">Logout</a></li>
+          {% else %}
+          <li><a href="/login/" class="nav-links">Login</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
     {% block content %}{% endblock %}
 
     <script src="{% static 'js/jquery.js'%}"></script>

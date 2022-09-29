@@ -46,3 +46,12 @@ p {
 .button {
   background-color: #006400;
 }
+
+.nav-bar {
+  background-color: #006400;
+  padding: 20px 20px 20px 20px;
+}
+
+.nav-links {
+  color: #FFFFFF;
+}

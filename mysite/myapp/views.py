@@ -1,17 +1,20 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 from . import models
 from . import forms
 
 # Create your views here.
+@login_required
 def index(request, page=0):
     #return HttpResponse("Hello, world! CINS 465!")
+    current_user = request.user
     page_list = list(range(page*10, page*10 + 10, 1))
     squares_list = [x**2 for x in range(10)]
     context = {
-        'first_name': 'Shelley',
-        'last_name': 'Wong',
+        'current_user': current_user,
         'title': 'CINS465',
         'msg': 'Hello World',
         'squares_list': squares_list,
@@ -49,3 +52,21 @@ def questions(request):
         'q_list': q_list,
     }
     return render(request, "questions.html", context=context)
+
+def register(request):
+    if request.method == "POST":
+        form = forms.RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save(request)
+            return redirect("/login/")
+    else:
+        form = forms.RegistrationForm(request.POST)
+
+    context = {
+        "form": form
+    }
+    return render(request, "registration/register.html", context=context)
+
+def logout_user(request):
+    logout(request)
+    return redirect("/login/")
