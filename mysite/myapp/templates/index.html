@@ -16,30 +16,49 @@
     </div>
   </div>
   <div class="grid-x grid-padding-x">
-    <div class="large-4 medium-3 small-3 cell">
+    <div class="large-3 medium-3 cell">
       {% if prev_page >= 0 %}
       <a href="/{{ prev_page }}">Prev</a>
       {% endif %}
       <a href="/{{ next_page }}">Next</a>
       <div><a href="/questions">Ask a Question</a></div>
     </div>
-    <div class="large-4 medium-6 small-9 cell">
+    <div class="large-3 medium-3 cell">
       <ol>
         {% for elem in page_list %}
         <li>{{ elem }}</li>
         {% endfor %}
       </ol>
     </div>
-    <div class="large-4 medium-3 small-12 cell">
+    <div class="large-3 medium-3 cell">
       <ul>
         {% for num in squares_list %}
         <li>{{ num }}</li>
         {% endfor %}
       </ul>
     </div>
+    {% verbatim %}
+    <div class="large-3 medium-3 cell">
+      <div id="vue-examples">
+        <button @click="count++">
+          Count is: {{ count }}
+        </button>
+        <hr>
+        <button @click="welcome = !welcome" class="button">Toggle</button>
+        <h2 v-if="welcome">Welcome!</h2>
+        <h2 v-else>Goodbye!</h2>
+      </div>
+      <div id="list-example">
+        <li v-for="(item, index) in items">
+          {{ index }}: {{ item.message }}
+        </li>
+      </div>
+    </div>
+    {% endverbatim %}
   </div>
 {% endblock %}
 
 {% block scripts %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="{% static 'js/app.js'%}"></script>
 {% endblock %}
