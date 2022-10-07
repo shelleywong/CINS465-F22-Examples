@@ -22,7 +22,7 @@
       </form>
       {% endif %}
       <hr>
-      {% for q in q_list %}
+      <!-- {% for q in q_list %}
       <div>{{ q.question_text }}</div>
       <p>{{ q.author }}, {{ q.pub_date }}</p>
       <ul>
@@ -30,11 +30,30 @@
         <li>{{ a.answer_text }}</li>
         {% endfor %}
       </ul>
-      {% endfor %}
+      <a href=" '/answer/' + q.id +'/' " + >Answer</a>
+      {% endfor %} -->
+      {% verbatim %}
+      <div id="question-list">
+        <div class="space" v-for="q in questions">
+          <div>{{ q.question_text }}</div>
+          <p>{{ q.author }}, {{ q.pub_date }}</p>
+          <ul v-for="a in q.answers">
+            <li>{{ a.answer_text }}</li>
+          </ul>
+          <a class="space" v-bind:href=" '/answer/' + q.id +'/' ">Answer</a>
+          <br>
+        </div>
+      </div>
+      {% endverbatim %}
     </div>
   </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+<script src="{% static 'js/axios.min.js' %}"></script>
+<script src="{% static 'js/myvue.js'%}"></script>
 {% endblock %}

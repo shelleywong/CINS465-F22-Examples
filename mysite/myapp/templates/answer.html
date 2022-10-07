@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Answer
+{% endblock %}
+
+{% block content %}
+<div class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <div class="large-4 medium-6 small-12 large-offset-4 medium-offset-3 cell">
+      <h1>Answer</h1>
+      <form action="/answer/{{ quest_id }}/" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit Answer" class="button expanded">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
