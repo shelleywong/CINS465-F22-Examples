@@ -18,11 +18,23 @@ class QuestionForm(forms.Form):
             validators.MinLengthValidator(3, message="Ensure Your Question has at least 3 characters (it has 2)."),
             must_not_be_all_caps
         ])
+    image = forms.ImageField(label="Image File", required=False)
+    image_description = forms.CharField(
+        label="Image Description",
+        max_length=280,
+        required=False,
+        validators=[
+            validators.MinLengthValidator(3, message="Ensure Your Question has at least 3 characters (it has 2)."),
+            must_not_be_all_caps
+        ]
+    )
 
     def save(self, request):
         q_instance = models.QuestionModel()
         q_instance.question_text = self.cleaned_data["question_field"]
         q_instance.author = request.user
+        q_instance.image = self.cleaned_data["image"]
+        q_instance.image_description = self.cleaned_data["image_description"]
         q_instance.save()
         return q_instance
 

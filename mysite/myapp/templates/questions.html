@@ -15,7 +15,7 @@
   <div class="grid-x grid-padding-x">
     <div class="medium-6 medium-offset-3 cell">
       {% if request.user.is_authenticated %}
-      <form action="/questions/" method="post">
+      <form action="/questions/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ q_form }}
         <input class="button" type="submit" value="Submit">
@@ -36,6 +36,7 @@
       <div id="question-list">
         <div class="space" v-for="q in questions">
           <div>{{ q.question_text }}</div>
+          <img v-bind:src="q.image" v-bind:alt="q.image_description"/>
           <p>{{ q.author }}, {{ q.pub_date }}</p>
           <ul v-for="a in q.answers">
             <li>{{ a.answer_text }}, {{ a.author }}, {{ a.pub_date }}</li>

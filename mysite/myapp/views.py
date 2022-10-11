@@ -40,7 +40,7 @@ def index(request, page=0):
 
 def questions(request):
     if request.method == "POST":
-        q_form = forms.QuestionForm(request.POST)
+        q_form = forms.QuestionForm(request.POST, request.FILES)
         if q_form.is_valid() and request.user.is_authenticated:
             q_form.save(request)
             #q_form = forms.QuestionForm()
@@ -49,21 +49,21 @@ def questions(request):
     else: # GET and all other HTTP methods
         q_form = forms.QuestionForm()
 
-    q_objects = models.QuestionModel.objects.all()
-    q_list = []
-    for q in q_objects:
-        temp_q = {}
-        temp_q["question_text"] = q.question_text
-        temp_q["pub_date"] = q.pub_date
-        temp_q["author"] = q.author.username
-        a_objects = models.AnswerModel.objects.filter(question=q)
-        temp_q["answers"] = a_objects
-        q_list += [temp_q]
+    # q_objects = models.QuestionModel.objects.all()
+    # q_list = []
+    # for q in q_objects:
+    #     temp_q = {}
+    #     temp_q["question_text"] = q.question_text
+    #     temp_q["pub_date"] = q.pub_date
+    #     temp_q["author"] = q.author.username
+    #     a_objects = models.AnswerModel.objects.filter(question=q)
+    #     temp_q["answers"] = a_objects
+    #     q_list += [temp_q]
 
     context = {
         'title': 'CINS 465 Questions',
         'q_form': q_form,
-        'q_list': q_list,
+        # 'q_list': q_list,
     }
     return render(request, "questions.html", context=context)
 
@@ -78,6 +78,12 @@ def question_json(request):
         temp_q["pub_date"] = get_pub_date_str(q.pub_date)
         temp_q["author"] = q.author.username
         temp_q["id"] = q.id
+        if q.image:
+            temp_q["image"] = q.image.url
+            temp_q["image_description"] = q.image_description
+        else:
+            temp_q["image"] = ""
+            temp_q["image_description"] = ""
         a_objects = models.AnswerModel.objects.filter(question=q)
         temp_q["answers"] = []
         for ans in a_objects:

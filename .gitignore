@@ -237,3 +237,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# avoid uploading user-uploaded media files to remote git repo
+media/
