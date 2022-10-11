@@ -2,9 +2,23 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse #, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from datetime import datetime, timezone
 
 from . import models
 from . import forms
+
+def get_pub_date_str(pub_date):
+    time_diff = datetime.now(timezone.utc) - pub_date
+    td_sec = time_diff.total_seconds()
+    if td_sec < 60:
+        return "Published " + str(int(td_sec)) + " seconds ago"
+    td_min = divmod(td_sec, 60)[0]
+    if td_min < 60:
+        return "Published " + str(int(td_min)) + " minutes ago"
+    td_hr = divmod(td_min, 60)[0]
+    if td_hr < 24:
+        return "Published " + str(int(td_hr)) + " hours ago"
+    return pub_date.strftime("%d %b %Y, %I:%M %p")
 
 # Create your views here.
 @login_required
@@ -60,7 +74,8 @@ def question_json(request):
     for q in q_objects:
         temp_q = {}
         temp_q["question_text"] = q.question_text
-        temp_q["pub_date"] = q.pub_date
+        # temp_q["pub_date"] = q.pub_date.strftime("%d %b %Y, %H:%M")
+        temp_q["pub_date"] = get_pub_date_str(q.pub_date)
         temp_q["author"] = q.author.username
         temp_q["id"] = q.id
         a_objects = models.AnswerModel.objects.filter(question=q)
@@ -68,7 +83,8 @@ def question_json(request):
         for ans in a_objects:
             temp_a = {}
             temp_a["answer_text"] = ans.answer_text
-            temp_a["pub_date"] = ans.pub_date
+            # temp_a["pub_date"] = ans.pub_date
+            temp_a["pub_date"] = get_pub_date_str(ans.pub_date)
             temp_a["author"] = ans.author.username
             temp_a["id"] = ans.id
             temp_q["answers"] += [temp_a]

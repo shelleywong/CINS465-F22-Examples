@@ -30,7 +30,7 @@
         <li>{{ a.answer_text }}</li>
         {% endfor %}
       </ul>
-      <a href=" '/answer/' + q.id +'/' " + >Answer</a>
+      <a href=" '/answer/' + q.id +'/' ">Answer</a>
       {% endfor %} -->
       {% verbatim %}
       <div id="question-list">
@@ -38,7 +38,7 @@
           <div>{{ q.question_text }}</div>
           <p>{{ q.author }}, {{ q.pub_date }}</p>
           <ul v-for="a in q.answers">
-            <li>{{ a.answer_text }}</li>
+            <li>{{ a.answer_text }}, {{ a.author }}, {{ a.pub_date }}</li>
           </ul>
           <a class="space" v-bind:href=" '/answer/' + q.id +'/' ">Answer</a>
           <br>
@@ -52,8 +52,8 @@
 
 {% block scripts %}
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
 <script src="{% static 'js/axios.min.js' %}"></script>
 <script src="{% static 'js/myvue.js'%}"></script>
 {% endblock %}
