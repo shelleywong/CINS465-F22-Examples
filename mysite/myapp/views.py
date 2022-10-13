@@ -68,7 +68,7 @@ def questions(request):
     return render(request, "questions.html", context=context)
 
 def question_json(request):
-    q_objects = models.QuestionModel.objects.all()
+    q_objects = models.QuestionModel.objects.all().order_by("-pub_date")
     q_dictionary = {}
     q_dictionary["questions"] = []
     for q in q_objects:

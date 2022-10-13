@@ -21,7 +21,7 @@
         <input class="button" type="submit" value="Submit">
       </form>
       {% endif %}
-      <hr>
+
       <!-- {% for q in q_list %}
       <div>{{ q.question_text }}</div>
       <p>{{ q.author }}, {{ q.pub_date }}</p>
@@ -34,15 +34,28 @@
       {% endfor %} -->
       {% verbatim %}
       <div id="question-list">
-        <div class="space" v-for="q in questions">
-          <div>{{ q.question_text }}</div>
+        <div v-for="q in questions">
+
+          <div class="card-info">
+            <div class="card-info-content">
+              <div class="lead">{{ q.question_text }}</div>
+              <img v-bind:src="q.image" v-bind:alt="q.image_description"/>
+              <p>{{ q.author }}, {{ q.pub_date }}</p>
+              <ul v-for="a in q.answers">
+                <li>{{ a.answer_text }}, {{ a.author }}, {{ a.pub_date }}</li>
+              </ul>
+              <a class="space" v-bind:href=" '/answer/' + q.id +'/' ">Answer</a>
+            </div>
+          </div>
+
+          <!-- <div>{{ q.question_text }}</div>
           <img v-bind:src="q.image" v-bind:alt="q.image_description"/>
           <p>{{ q.author }}, {{ q.pub_date }}</p>
           <ul v-for="a in q.answers">
             <li>{{ a.answer_text }}, {{ a.author }}, {{ a.pub_date }}</li>
           </ul>
           <a class="space" v-bind:href=" '/answer/' + q.id +'/' ">Answer</a>
-          <br>
+          <br> -->
         </div>
       </div>
       {% endverbatim %}
