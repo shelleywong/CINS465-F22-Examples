@@ -1,10 +1,12 @@
 from django import forms
 from django.core import validators
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from . import models
 
 def must_not_be_all_caps(value):
+    """Function to check if input is all caps"""
     if value.isupper():
         raise forms.ValidationError("Must not be in all caps. No need to shout!")
     # in all cases, return cleaned data
@@ -15,7 +17,10 @@ class QuestionForm(forms.Form):
         label="Your Question",
         max_length=280,
         validators=[
-            validators.MinLengthValidator(3, message="Ensure Your Question has at least 3 characters (it has 2)."),
+            validators.MinLengthValidator(
+                3,
+                message="Ensure Your Question has at least 3 characters (it has 2)."
+            ),
             must_not_be_all_caps
         ])
     image = forms.ImageField(label="Image File", required=False)
@@ -24,7 +29,10 @@ class QuestionForm(forms.Form):
         max_length=280,
         required=False,
         validators=[
-            validators.MinLengthValidator(3, message="Ensure Your Question has at least 3 characters (it has 2)."),
+            validators.MinLengthValidator(
+                3,
+                message="Ensure Your Question has at least 3 characters (it has 2)."
+            ),
             must_not_be_all_caps
         ]
     )
@@ -43,7 +51,10 @@ class AnswerForm(forms.Form):
         label="Your Answer",
         max_length=280,
         validators=[
-            validators.MinLengthValidator(3, message="Ensure Your Answer has at least 3 characters (it has 2)."),
+            validators.MinLengthValidator(
+                3,
+                message="Ensure Your Answer has at least 3 characters (it has 2)."
+            ),
             must_not_be_all_caps
         ])
 
@@ -60,11 +71,13 @@ class RegistrationForm(UserCreationForm):
     email = forms.EmailField(label="Email", required=True)
 
     class Meta:
-        model = User
+        #model = User
+        model = get_user_model()
         fields = ("username", "email", "password1", "password2")
 
     def save(self, commit=True):
-        user = super(RegistrationForm, self).save(commit=False)
+        #user = super(RegistrationForm, self).save(commit=False)
+        user = super().save(commit=False)
         user.email = self.cleaned_data["email"]
         if commit:
             user.save()

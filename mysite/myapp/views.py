@@ -1,8 +1,8 @@
+from datetime import datetime, timezone
 from django.shortcuts import render, redirect
 from django.http import JsonResponse #, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from datetime import datetime, timezone
 
 from . import models
 from . import forms
@@ -71,20 +71,20 @@ def question_json(request):
     q_objects = models.QuestionModel.objects.all().order_by("-pub_date")
     q_dictionary = {}
     q_dictionary["questions"] = []
-    for q in q_objects:
+    for quest in q_objects:
         temp_q = {}
-        temp_q["question_text"] = q.question_text
+        temp_q["question_text"] = quest.question_text
         # temp_q["pub_date"] = q.pub_date.strftime("%d %b %Y, %H:%M")
-        temp_q["pub_date"] = get_pub_date_str(q.pub_date)
-        temp_q["author"] = q.author.username
-        temp_q["id"] = q.id
-        if q.image:
-            temp_q["image"] = q.image.url
-            temp_q["image_description"] = q.image_description
+        temp_q["pub_date"] = get_pub_date_str(quest.pub_date)
+        temp_q["author"] = quest.author.username
+        temp_q["id"] = quest.id
+        if quest.image:
+            temp_q["image"] = quest.image.url
+            temp_q["image_description"] = quest.image_description
         else:
             temp_q["image"] = ""
             temp_q["image_description"] = ""
-        a_objects = models.AnswerModel.objects.filter(question=q)
+        a_objects = models.AnswerModel.objects.filter(question=quest)
         temp_q["answers"] = []
         for ans in a_objects:
             temp_a = {}
