@@ -1,0 +1,6 @@
+[MASTER]
+load-plugins=pylint_django
+ignore=migrations
+
+[MESSAGES CONTROL]
+disable=django-not-configured,missing-docstring
