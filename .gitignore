@@ -239,3 +239,6 @@ Temporary Items
 
 # avoid uploading user-uploaded media files to remote git repo
 media/
+
+# ignore SSL/TLS certificates
+nginx/ssl
