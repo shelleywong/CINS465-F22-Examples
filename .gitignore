@@ -242,3 +242,6 @@ media/
 
 # ignore SSL/TLS certificates
 nginx/ssl
+
+# ignore cloud key
+cins465-cloudkey.json
