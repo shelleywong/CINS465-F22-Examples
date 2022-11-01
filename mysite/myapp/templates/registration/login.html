@@ -15,6 +15,10 @@ Login
         <input type="submit" value="Login" class="button expanded">
         <a href="/register/" class="secondary button expanded">Register</a>
         <input type="hidden" name="next" value="{{ request.GET.next }}">
+        <p class="text-center">- Or -</p>
+        <a href="{% url "social:begin" "google-oauth2" %}" class="button expanded">
+          Sign in with Google
+        </a>
       </form>
     </div>
   </div>
