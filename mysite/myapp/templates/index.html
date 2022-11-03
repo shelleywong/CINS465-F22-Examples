@@ -12,7 +12,7 @@
     <div class="large-12 cell">
       <img class="csuclogo" src="{% static 'images/csuc-logo.svg'%}" alt="CSU, Chico logo">
       <h1>{{ title}} {{ msg }}!</h1>
-      <p>Hello, {{ current_user.username }}!</p>
+      <p>Hello, <span id="cur-user">{{ current_user.username }}</span>!</p>
     </div>
   </div>
   <div class="grid-x grid-padding-x">
@@ -61,4 +61,18 @@
 {% block scripts %}
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="{% static 'js/app.js'%}"></script>
+<script type="module">
+  var curUser = document.getElementById("cur-user").innerHTML;
+  import init, { greet, add } from '/wasm/hello_wasm.js';
+  async function run(){
+    await init();
+    // Afterwards we can use all functionality defined in wasm
+    greet(curUser);
+    const result = add(1,2);
+    console.log(`1 + 2 = ${result}`);
+    if(result != 3)
+      throw new Error("wasm addition doesn't work!");
+  }
+  run();
+</script>
 {% endblock %}

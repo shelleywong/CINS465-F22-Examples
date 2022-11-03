@@ -19,17 +19,49 @@ services:
     working_dir: /code/mysite
     command: daphne -b 0.0.0.0 -p 8000 mysite.asgi:application
 
-  nginx:
-    restart: always
-    build: ./nginx/
+  # nginx:
+  #   restart: always
+  #   build: ./nginx/
+  #   depends_on:
+  #     - web
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   links:
+  #     - web:web
+  #   volumes:
+  #     - ./mysite/static/:/static
+
+  wasm:
+    build: ./wasm/
+    environment:
+      - USER=shelleywong
+    working_dir: /code/hello-wasm
+    volumes: 
+      - .:/code
+
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
     depends_on:
       - web
-    ports:
-      - 80:80
-      - 443:443
     links:
       - web:web
+    ports:
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./mysite/static/:/static
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/mysite/static:/srv/static/
+      - $PWD/hello-wasm/pkg/:/srv/wasm
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+
+
 
 
